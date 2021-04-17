@@ -1,4 +1,4 @@
 export type ResponseError = {
     definition: string,
-    code: number
+    code: string | undefined
 }

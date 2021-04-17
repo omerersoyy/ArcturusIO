@@ -14,7 +14,7 @@ export class DummyApiService extends BaseService {
         return this.request(RequestMethod.GET, `/user?limit=${limit}&page=${page}`)
     }
 
-    getSingleUser(userId: string): Promise<ApiResponse<unknown, unknown>> {
+    getSingleUser(userId: string): Promise<ApiResponse<User>> {
         return this.request(RequestMethod.GET, `/user/${userId}`)
     }
 

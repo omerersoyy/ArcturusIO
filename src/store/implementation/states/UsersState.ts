@@ -60,7 +60,7 @@ export const reducer = createReducer(initialState, {
     [Types.GET_USERS]: getUsers,
     [Types.GET_USERS_SUCCESS]: getUsersSuccess,
     [Types.GET_USERS_ERROR]: getUsersError,
-    [Types.GET_SINGLE_USER]: getUsers,
+    [Types.GET_SINGLE_USER]: getSingleUser,
     [Types.GET_SINGLE_USER_SUCCESS]: getSingleUserSuccess,
     [Types.GET_SINGLE_USER_ERROR]: getSingleUserError
 })
