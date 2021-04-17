@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, Reducer, AnyAction, $CombinedState, CombinedState } from 'redux'
+import { createStore, applyMiddleware, Reducer, AnyAction, CombinedState } from 'redux'
 import createSagaMiddleware, { Saga } from 'redux-saga'
 import AsyncStorage from '@react-native-community/async-storage'
 import { persistStore, persistReducer } from 'redux-persist'
