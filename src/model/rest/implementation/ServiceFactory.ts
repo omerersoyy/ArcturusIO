@@ -1,12 +1,12 @@
 import { ApisauceInstance, create } from "apisauce";
-import { Api } from "../../types/Api";
+import { IApi } from "../abstraction/IApi";
 
 export class ServiceFactory {
 
     private static services: Map<string, ApisauceInstance> = new Map()
     private static _serviceInstance: ApisauceInstance | undefined
 
-    static getServiceInstance(service: string, api: Api): ApisauceInstance {
+    static getServiceInstance(service: string, api: IApi): ApisauceInstance {
         
         this._serviceInstance = this.services.get(service)
 
