@@ -1,13 +1,13 @@
 import { createActions, createReducer } from 'reduxsauce'
 import Immutable, { ImmutableObject } from 'seamless-immutable'
 import { IUsersState } from '../../abstraction/users/IUsersState'
-import { IGetUsersAction } from '../../abstraction/users/IUsersActions'
-import { IGetUsersActionCreateor } from '../../abstraction/users/IUsersActionCreators'
+import { IUsersActionCreateor } from '../../abstraction/users/IUsersActionCreators'
 import { IGetUsers, IGetUsersSuccess, IGetUsersError, IGetSingleUser, IGetSingleUserSuccess, IGetSingleUserError } from '../../abstraction/users/IReducerProps'
+import { IUsersActionTypes } from '../../abstraction/users/IUsersActionTypes'
 
   
 
-const { Types, Creators } = createActions<IGetUsersAction, IGetUsersActionCreateor>({
+const { Types, Creators } = createActions<IUsersActionTypes, IUsersActionCreateor>({
     getUsers: ['page, limit'],
     getUsersSuccess: ['users'],
     getUsersError: ['error'],
@@ -56,7 +56,7 @@ export const getSingleUserError: IGetSingleUserError = (state, { error }): Immut
 }
 
 
-export const reducer = createReducer(initialState, {
+export const reducer = createReducer<ImmutableObject<IUsersState>>(initialState, {
     [Types.GET_USERS]: getUsers,
     [Types.GET_USERS_SUCCESS]: getUsersSuccess,
     [Types.GET_USERS_ERROR]: getUsersError,

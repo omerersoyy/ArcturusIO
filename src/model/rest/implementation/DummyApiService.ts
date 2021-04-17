@@ -3,9 +3,10 @@ import { IApi } from "../abstraction/IApi";
 import { RequestMethod } from "../../types/RequestMethod";
 import { BaseService } from "./BaseService";
 import { User } from "../../types/User";
+import { Post } from "../../types/Post";
 
 export class DummyApiService extends BaseService {
-    
+
     constructor(api: IApi, service: string) {
         super(api, service)
     }
@@ -22,15 +23,21 @@ export class DummyApiService extends BaseService {
         return this.request(RequestMethod.GET, `/user/${userId}/post?limit=${limit}&page=${page}`)
     }
 
-    getPosts(page: number, limit: number): Promise<ApiResponse<unknown, unknown>> {
-        return this.request(RequestMethod.GET, `/post?limit=${limit}&page=${page}`)
+    getPosts(page: number, limit: number, userId?: string, tagTitle?: string): Promise<ApiResponse<Array<Post>>> {
+        if (userId) {
+            return this.request(RequestMethod.GET, `/user/${userId}/post?limit=${limit}&page=${page}`)
+        } else if (tagTitle) {
+            return this.request(RequestMethod.GET, `/tag/${tagTitle}/post?limit=${limit}&page=${page}`)
+        } else {
+            return this.request(RequestMethod.GET, `/user/${userId}/post?limit=${limit}&page=${page}`)
+        }
     }
 
-    getSinglePost(postId: number): Promise<ApiResponse<unknown, unknown>> {
+    getSinglePost(postId: string): Promise<ApiResponse<unknown, unknown>> {
         return this.request(RequestMethod.GET, `/post${postId}`)
     }
 
-    getComments(postId: number): Promise<ApiResponse<unknown, unknown>> {
+    getComments(postId: string): Promise<ApiResponse<unknown, unknown>> {
         return this.request(RequestMethod.GET, `/post${postId}/comment`)
     }
 

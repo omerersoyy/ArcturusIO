@@ -2,8 +2,14 @@ import { createStore, applyMiddleware, Reducer, AnyAction, CombinedState } from 
 import createSagaMiddleware, { Saga } from 'redux-saga'
 import AsyncStorage from '@react-native-community/async-storage'
 import { persistStore, persistReducer } from 'redux-persist'
+import { ImmutableObject } from 'seamless-immutable'
+import { IUsersState } from '../abstraction/users/IUsersState'
+import { IPostsState } from '../abstraction/posts/IPostsState'
 
-export default (rootReducer: Reducer<CombinedState<{ user: unknown; }>, AnyAction>, rootSaga: Saga) => {
+export default (rootReducer: Reducer<CombinedState<{ 
+    users: ImmutableObject<IUsersState>,
+    posts: ImmutableObject<IPostsState>
+ }>, AnyAction>, rootSaga: Saga) => {
 
     const middleware = []
     const sagaMiddleware = createSagaMiddleware()

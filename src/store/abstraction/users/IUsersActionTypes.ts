@@ -1,6 +1,6 @@
 import { DefaultActionTypes } from "reduxsauce";
 
-export interface IGetUsersActionType extends DefaultActionTypes {
+export interface IUsersActionTypes extends DefaultActionTypes {
     GET_USERS: "getUsers",
     GET_USERS_SUCCESS: "getUsersSuccess",
     GET_USERS_ERROR: "getUsersError",
