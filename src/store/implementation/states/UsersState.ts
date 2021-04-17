@@ -1,16 +1,19 @@
 import { createActions, createReducer } from 'reduxsauce'
 import Immutable, { ImmutableObject } from 'seamless-immutable'
 import { IUsersState } from '../../abstraction/users/IUsersState'
-import { IGetUsers } from '../../abstraction/users/IGetUsers'
-import { IGetUsersSuccess } from '../../abstraction/users/IGetUsersSuccess'
-import { IGetUsersError } from '../../abstraction/users/IGetUsersError'
+import { IGetUsersAction } from '../../abstraction/users/IUsersActions'
+import { IGetUsersActionCreateor } from '../../abstraction/users/IUsersActionCreators'
+import { IGetUsers, IGetUsersSuccess, IGetUsersError, IGetSingleUser, IGetSingleUserSuccess, IGetSingleUserError } from '../../abstraction/users/IReducerProps'
 
+  
 
-const { Types, Creators } = createActions({
+const { Types, Creators } = createActions<IGetUsersAction, IGetUsersActionCreateor>({
     getUsers: ['page, limit'],
     getUsersSuccess: ['users'],
     getUsersError: ['error'],
     getSingleUser: ['userId'],
+    getSingleUserSuccess: ['currentUser'],
+    getSingleUserError: ['error']
 })
 
 export const UsersActionTypes = Types
@@ -21,7 +24,7 @@ const initialState: ImmutableObject<IUsersState> = Immutable({
     currentUser: null,
     userId: "",
     fetching: false,
-    error: "",
+    error: null,
     page: 0,
     limit: 0
 })
@@ -32,11 +35,23 @@ export const getUsers: IGetUsers = (state, {page, limit}): ImmutableObject<IUser
     return state.merge({ fetching: true, page, limit, error: initialState.error })
 }
 
-export const getUsersSuccess: IGetUsersSuccess = (state, { users }) => {
+export const getUsersSuccess: IGetUsersSuccess = (state, { users }): ImmutableObject<IUsersState> => {
     return state.merge({ users, fetching: initialState.fetching, error: initialState.error })
 }
 
-export const getUsersError: IGetUsersError = (state, { error }) => {
+export const getUsersError: IGetUsersError = (state, { error }): ImmutableObject<IUsersState> => {
+    return state.merge({ error, fetching: initialState.fetching })
+}
+
+export const getSingleUser: IGetSingleUser = (state, {userId}): ImmutableObject<IUsersState> => {
+    return state.merge({ fetching: true, userId, error: initialState.error })
+}
+
+export const getSingleUserSuccess: IGetSingleUserSuccess = (state, { currentUser }): ImmutableObject<IUsersState> => {
+    return state.merge({ currentUser, fetching: initialState.fetching, error: initialState.error })
+}
+
+export const getSingleUserError: IGetSingleUserError = (state, { error }): ImmutableObject<IUsersState> => {
     return state.merge({ error, fetching: initialState.fetching })
 }
 
@@ -44,5 +59,8 @@ export const getUsersError: IGetUsersError = (state, { error }) => {
 export const reducer = createReducer(initialState, {
     [Types.GET_USERS]: getUsers,
     [Types.GET_USERS_SUCCESS]: getUsersSuccess,
-    [Types.GET_USERS_ERROR]: getUsersError
+    [Types.GET_USERS_ERROR]: getUsersError,
+    [Types.GET_SINGLE_USER]: getUsers,
+    [Types.GET_SINGLE_USER_SUCCESS]: getSingleUserSuccess,
+    [Types.GET_SINGLE_USER_ERROR]: getSingleUserError
 })

@@ -1,3 +1,4 @@
+import { ResponseError } from "../../../model/types/ResponseError";
 import { User } from "../../../model/types/User";
 
 export interface IUsersState {
@@ -5,7 +6,7 @@ export interface IUsersState {
     currentUser: User | null,
     userId: string,
     fetching: boolean,
-    error: string,
+    error: ResponseError | null,
     page: number,
     limit: number
 }

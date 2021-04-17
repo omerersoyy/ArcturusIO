@@ -2,6 +2,7 @@ import { ApiResponse } from "apisauce";
 import { IApi } from "../abstraction/IApi";
 import { RequestMethod } from "../../types/RequestMethod";
 import { BaseService } from "./BaseService";
+import { User } from "../../types/User";
 
 export class DummyApiService extends BaseService {
     
@@ -9,7 +10,7 @@ export class DummyApiService extends BaseService {
         super(api, service)
     }
 
-    getUsers(page: number, limit: number): Promise<ApiResponse<unknown, unknown>> {
+    getUsers(page: number, limit: number): Promise<ApiResponse<Array<User>>> {
         return this.request(RequestMethod.GET, `/user?limit=${limit}&page=${page}`)
     }
 
