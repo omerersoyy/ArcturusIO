@@ -5,10 +5,12 @@ import { persistStore, persistReducer } from 'redux-persist'
 import { ImmutableObject } from 'seamless-immutable'
 import { IUsersState } from '../abstraction/users/IUsersState'
 import { IPostsState } from '../abstraction/posts/IPostsState'
+import { ITagsState } from '../abstraction/tags/ITagsState'
 
 export default (rootReducer: Reducer<CombinedState<{ 
     users: ImmutableObject<IUsersState>,
-    posts: ImmutableObject<IPostsState>
+    posts: ImmutableObject<IPostsState>,
+    tags: ImmutableObject<ITagsState>
  }>, AnyAction>, rootSaga: Saga) => {
 
     const middleware = []
