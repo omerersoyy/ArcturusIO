@@ -38,6 +38,9 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ArcturusIO/main.m; sourceTree = "<group>"; };
 		1ADC783708447D71AD480820 /* Pods-ArcturusIO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArcturusIO.release.xcconfig"; path = "Target Support Files/Pods-ArcturusIO/Pods-ArcturusIO.release.xcconfig"; sourceTree = "<group>"; };
 		2473362DE6A186D13B33B8D8 /* libPods-ArcturusIO-ArcturusIOTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArcturusIO-ArcturusIOTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		373306F1262C415100478785 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		373306F2262C415100478785 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		373306FC262C42A400478785 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ArcturusIO/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C93C64E6894022CB657C2C54 /* Pods-ArcturusIO-ArcturusIOTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArcturusIO-ArcturusIOTests.debug.xcconfig"; path = "Target Support Files/Pods-ArcturusIO-ArcturusIOTests/Pods-ArcturusIO-ArcturusIOTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D674BED4D8F44BFDEEAFDF82 /* Pods-ArcturusIO-ArcturusIOTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArcturusIO-ArcturusIOTests.release.xcconfig"; path = "Target Support Files/Pods-ArcturusIO-ArcturusIOTests/Pods-ArcturusIO-ArcturusIOTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -91,7 +94,6 @@
 				C93C64E6894022CB657C2C54 /* Pods-ArcturusIO-ArcturusIOTests.debug.xcconfig */,
 				D674BED4D8F44BFDEEAFDF82 /* Pods-ArcturusIO-ArcturusIOTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -128,6 +130,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				373306FC262C42A400478785 /* MaterialIcons.ttf */,
+				373306F2262C415100478785 /* FontAwesome.ttf */,
+				373306F1262C415100478785 /* MaterialCommunityIcons.ttf */,
 				13B07FAE1A68108700A75B9A /* ArcturusIO */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ArcturusIOTests */,
