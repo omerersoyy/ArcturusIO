@@ -1,5 +1,4 @@
 # ArcturusIO
-# PIX
 
 Arcturus is an app that uses Dummyapi.io as a service and displays posts sent by users, comments, user info etc.
 
