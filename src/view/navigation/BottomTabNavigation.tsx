@@ -1,45 +1,44 @@
 import React from 'react';
 import { Text } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import Main from '../screens/Main';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import Colors from '../../utils/Colors';
-import { BottomNavigationTypes } from '../types/NavigationPropTypes';
-import { Styles } from './styles/BottomTabNavigationStyles';
+import { Styles } from './styles/BottomTabNavigationStyles'
 import { IGlobalState } from '../abstraction/IGlobalState'
+import PostsScreen from '../screens/PostsScreen'
+import UsersNavigation from './UsersNavigation';
+import UsersScreen from '../screens/UsersScreen';
 
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigation = ({ initialParams }: BottomNavigationTypes) => {
+const TabNavigation = () => {
 
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarLabel: () => {
+        tabBarLabel: ({ focused }) => {
           return (
-            <Text style={Styles.tabBarLabel}>
+            <Text style={focused ? Styles.activeTabBarLabel : Styles.inactiveTabBarLabel}>
               {route.name}
             </Text>
           )
         },
-        tabBarIcon: () => {
+        tabBarIcon: ({ focused }) => {
           let iconName: string;
 
           if (route.name === "Posts") {
             iconName = "dynamic-feed";
-          } else if (route.name === "Users") {
-            iconName = 'people';
           } else {
-            iconName = 'face'
+            iconName = 'people';
           }
 
           return (
             <Icon
               name={iconName}
               size={25}
-              color={Colors.white}
+              color={focused ? Colors.primary : Colors.white}
             />
           )
         }
@@ -47,13 +46,11 @@ const TabNavigation = ({ initialParams }: BottomNavigationTypes) => {
       tabBarOptions={{
         activeBackgroundColor: Styles.activeBackground.color,
         style: Styles.inactiveBackground
-
-      }}
+      }} 
     >
 
-      <Tab.Screen name={"Posts"} component={Main} />
-      <Tab.Screen name={"Users"} component={Main} />
-      <Tab.Screen name={"Profile"} component={Main} />
+      <Tab.Screen name={"Posts"} component={PostsScreen} />
+      <Tab.Screen name={"Users"} component={UsersScreen} />
     </Tab.Navigator>
   )
 }

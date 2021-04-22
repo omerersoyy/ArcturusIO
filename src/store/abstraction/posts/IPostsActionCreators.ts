@@ -11,7 +11,7 @@ export interface IPostsActionCreateor extends DefaultActionCreators {
     getSinglePost: (id: string) => IGetSinglePostAction,
     getSinglePostSuccess: (currentPost: Post) => IGetPostsSuccessAction,
     getSinglePostEror: (error: ResponseError) => IPostsErrorAction,
-    getCommentsForPost: (postId: string) => IGetCommentsForPostAction,
+    getCommentsForPost: (postId: string, page: number, limit: number) => IGetCommentsForPostAction,
     getCommentsForPostSuccess: (comments: Array<Comment>) => IGetCommentsForPostActionSuccess,
     getCommentsForPostError: (error: ResponseError) => IPostsErrorAction
 }

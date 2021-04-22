@@ -6,11 +6,13 @@ import { ImmutableObject } from 'seamless-immutable'
 import { IUsersState } from '../abstraction/users/IUsersState'
 import { IPostsState } from '../abstraction/posts/IPostsState'
 import { ITagsState } from '../abstraction/tags/ITagsState'
+import { IAuthState } from '../abstraction/auth/IAuthState'
 
 export default (rootReducer: Reducer<CombinedState<{ 
     users: ImmutableObject<IUsersState>,
     posts: ImmutableObject<IPostsState>,
-    tags: ImmutableObject<ITagsState>
+    tags: ImmutableObject<ITagsState>,
+    auth: ImmutableObject<IAuthState>
  }>, AnyAction>, rootSaga: Saga) => {
 
     const middleware = []
@@ -21,7 +23,7 @@ export default (rootReducer: Reducer<CombinedState<{
     const persistConfig = {
         key: 'root',
         storage: AsyncStorage,
-        whitelist: []
+        whitelist: ['user']
     }
 
     const persistedReducer = persistReducer(persistConfig, rootReducer)

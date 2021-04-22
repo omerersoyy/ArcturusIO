@@ -4,9 +4,9 @@ import { Post } from "../../../model/types/Post";
 import { ResponseError } from "../../../model/types/ResponseError";
 
 export interface IGetPostsAction extends AnyAction {
-    type: string,
-    page: number,
-    limit: number,
+    type: string
+    page: number
+    limit: number
     userId?: string
     tagTitle?: string
 }
@@ -27,8 +27,10 @@ export interface IGetSinglePostSuccessAction extends AnyAction {
 }
 
 export interface IGetCommentsForPostAction extends AnyAction {
-    type: string,
+    type: string
     postId: string
+    page: number
+    limit: number
 }
 
 export interface IGetCommentsForPostActionSuccess extends AnyAction {

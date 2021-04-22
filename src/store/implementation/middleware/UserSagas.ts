@@ -1,16 +1,18 @@
-import { ApiResponse } from 'apisauce'
-import { call, put } from 'redux-saga/effects'
+import { ApiOkResponse, ApiResponse } from 'apisauce'
+import { act } from 'react-test-renderer'
+import { call, put, take } from 'redux-saga/effects'
 import { DummyApiService } from '../../../model/rest/implementation/DummyApiService'
 import { User } from '../../../model/types/User'
+import { UsersResponse } from '../../../model/types/UsersResponse'
 import UsersActions from '../states/UsersState'
 
 
-export function* getUsers(service: DummyApiService, { page, limit }: ReturnType<typeof UsersActions.getUsers>) {
+export function* getUsers(service: DummyApiService, action: any) {
 
-    const response: ApiResponse<Array<User>> = yield service.getUsers(page, limit)
+    const response = yield service.getUsers(action.page, action.limit)
 
     if (response.ok) {
-        yield put(UsersActions.getUsersSuccess(response.data as Array<User>))
+        yield put(UsersActions.getUsersSuccess(response.data?.data || []))
     } else {
         yield put(UsersActions.getUsersError({
             definition: response.originalError?.response?.data || "Unknown Error!",

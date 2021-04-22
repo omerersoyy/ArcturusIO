@@ -4,6 +4,8 @@ import { RequestMethod } from "../../types/RequestMethod";
 import { BaseService } from "./BaseService";
 import { User } from "../../types/User";
 import { Post } from "../../types/Post";
+import { UsersResponse } from "../../types/UsersResponse";
+import { PostsResponse } from "../../types/PostsResponse";
 
 export class DummyApiService extends BaseService {
 
@@ -11,7 +13,7 @@ export class DummyApiService extends BaseService {
         super(api, service)
     }
 
-    getUsers(page: number, limit: number): Promise<ApiResponse<Array<User>>> {
+    getUsers(page: number, limit: number): Promise<ApiResponse<UsersResponse>> {
         return this.request(RequestMethod.GET, `/user?limit=${limit}&page=${page}`)
     }
 
@@ -23,22 +25,22 @@ export class DummyApiService extends BaseService {
         return this.request(RequestMethod.GET, `/user/${userId}/post?limit=${limit}&page=${page}`)
     }
 
-    getPosts(page: number, limit: number, userId?: string, tagTitle?: string): Promise<ApiResponse<Array<Post>>> {
+    getPosts(page: number, limit: number, userId?: string, tagTitle?: string): Promise<ApiResponse<PostsResponse>> {
         if (userId) {
             return this.request(RequestMethod.GET, `/user/${userId}/post?limit=${limit}&page=${page}`)
         } else if (tagTitle) {
             return this.request(RequestMethod.GET, `/tag/${tagTitle}/post?limit=${limit}&page=${page}`)
         } else {
-            return this.request(RequestMethod.GET, `/user/${userId}/post?limit=${limit}&page=${page}`)
+            return this.request(RequestMethod.GET, `/post?limit=${limit}&page=${page}`)
         }
     }
 
     getSinglePost(postId: string): Promise<ApiResponse<unknown, unknown>> {
-        return this.request(RequestMethod.GET, `/post${postId}`)
+        return this.request(RequestMethod.GET, `/post/${postId}`)
     }
 
-    getComments(postId: string): Promise<ApiResponse<unknown, unknown>> {
-        return this.request(RequestMethod.GET, `/post${postId}/comment`)
+    getComments(postId: string, page: number, limit: number): Promise<ApiResponse<unknown, unknown>> {
+        return this.request(RequestMethod.GET, `/post/${postId}/comment?limit=${limit}&page=${page}`)
     }
 
     getTags(page: number, limit: number): Promise<ApiResponse<unknown, unknown>> {

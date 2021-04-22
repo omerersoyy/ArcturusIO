@@ -3,14 +3,16 @@ import Immutable, { ImmutableObject } from 'seamless-immutable'
 import { IPostsActionTypes } from '../../abstraction/posts/IPostsActionTypes'
 import { IPostsActionCreateor } from '../../abstraction/posts/IPostsActionCreators'
 import { IPostsState } from '../../abstraction/posts/IPostsState'
-import { 
-    IGetPosts, 
-    IGetPostsSuccess, 
-    IGetPostsError, 
-    IGetSinglePost, 
-    IGetSinglePostSuccess, 
-    IGetSinglePostError 
+import {
+    IGetPosts,
+    IGetPostsSuccess,
+    IGetPostsError,
+    IGetSinglePost,
+    IGetSinglePostSuccess,
+    IGetSinglePostError,
+    IGetCommentsForPost
 } from '../../abstraction/posts/IReducerProps'
+import { tr } from 'date-fns/locale'
 
 
 
@@ -46,7 +48,7 @@ const initialState: ImmutableObject<IPostsState> = Immutable({
 
 
 export const getPosts: IGetPosts = (state, { page, limit, userId, tagTitle }): ImmutableObject<IPostsState> => {
-    return state.merge({ fetching: true, page, limit, userId, tagTitle, error: initialState.error })
+    return state.merge({ postList: [], fetching: true, page, limit, userId, tagTitle, error: initialState.error })
 }
 
 export const getPostsSuccess: IGetPostsSuccess = (state, { postList }): ImmutableObject<IPostsState> => {
@@ -69,6 +71,18 @@ export const getSinglePostError: IGetSinglePostError = (state, { error }): Immut
     return state.merge({ error, fetching: initialState.fetching })
 }
 
+export const getCommentsForPost: IGetCommentsForPost = (state, { postId }): ImmutableObject<IPostsState> => {
+    return state.merge({ postId, fetching: true, error: initialState.error })
+}
+
+export const getCommentsForPostSuccess: IGetCommentsForPost = (state, { comments }): ImmutableObject<IPostsState> => {
+    return state.merge({ comments, fetching: initialState.fetching, error: initialState.error })
+}
+
+export const getCommentsForPostError: IGetCommentsForPost = (state, { error }): ImmutableObject<IPostsState> => {
+    return state.merge({ error, fetching: initialState.fetching })
+}
+
 
 export const postsReducer = createReducer(initialState, {
     [Types.GET_POSTS]: getPosts,
@@ -76,5 +90,8 @@ export const postsReducer = createReducer(initialState, {
     [Types.GET_POSTS_ERROR]: getPostsError,
     [Types.GET_SINGLE_POST]: getSinglePost,
     [Types.GET_SINGLE_POST_SUCCESS]: getSinglePostSuccess,
-    [Types.GET_SINGLE_POST_ERROR]: getSinglePostError
+    [Types.GET_SINGLE_POST_ERROR]: getSinglePostError,
+    [Types.GET_COMMENTS_FOR_POST]: getCommentsForPost,
+    [Types.GET_COMMENTS_FOR_POST_SUCCESS]: getCommentsForPostSuccess,
+    [Types.GET_COMMENTS_FOR_POST_ERROR]: getCommentsForPostError
 })

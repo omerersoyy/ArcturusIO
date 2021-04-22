@@ -4,12 +4,13 @@ import { IUsersState } from '../../abstraction/users/IUsersState'
 import { IUsersActionCreateor } from '../../abstraction/users/IUsersActionCreators'
 import { IGetUsers, IGetUsersSuccess, IGetUsersError, IGetSingleUser, IGetSingleUserSuccess, IGetSingleUserError } from '../../abstraction/users/IReducerProps'
 import { IUsersActionTypes } from '../../abstraction/users/IUsersActionTypes'
+import { User } from '../../../model/types/User'
 
   
 
 const { Types, Creators } = createActions<IUsersActionTypes, IUsersActionCreateor>({
     getUsers: ['page, limit'],
-    getUsersSuccess: ['users'],
+    getUsersSuccess: ['userList'],
     getUsersError: ['error'],
     getSingleUser: ['userId'],
     getSingleUserSuccess: ['currentUser'],
@@ -20,8 +21,15 @@ export const UsersActionTypes = Types
 export default Creators
 
 const initialState: ImmutableObject<IUsersState> = Immutable({
-    users: [],
-    currentUser: null,
+    userList: [],
+    currentUser: {
+        firstName: "",
+        lastName: "",
+        location: {
+            country: "",
+            city: ""
+        }
+    } as User,
     userId: "",
     fetching: false,
     error: null,
@@ -35,8 +43,8 @@ export const getUsers: IGetUsers = (state, {page, limit}): ImmutableObject<IUser
     return state.merge({ fetching: true, page, limit, error: initialState.error })
 }
 
-export const getUsersSuccess: IGetUsersSuccess = (state, { users }): ImmutableObject<IUsersState> => {
-    return state.merge({ users, fetching: initialState.fetching, error: initialState.error })
+export const getUsersSuccess: IGetUsersSuccess = (state, { userList }): ImmutableObject<IUsersState> => {
+    return state.merge({ userList, fetching: initialState.fetching, error: initialState.error })
 }
 
 export const getUsersError: IGetUsersError = (state, { error }): ImmutableObject<IUsersState> => {

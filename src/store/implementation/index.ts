@@ -4,11 +4,13 @@ import initializeStore from './InitializeStore'
 import { reducer } from './states/UsersState'
 import { postsReducer } from './states/PostsState'
 import { tagsReducer } from './states/TagsState'
+import { authReducer } from './states/AuthState'
 
 export const reducers = combineReducers({
   users: reducer,
   posts: postsReducer,
-  tags: tagsReducer
+  tags: tagsReducer,
+  auth: authReducer
 })
 
 export default () => {
